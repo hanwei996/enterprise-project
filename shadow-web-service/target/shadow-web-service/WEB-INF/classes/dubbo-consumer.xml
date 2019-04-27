@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 应用名称-->
+   <!-- <dubbo:application name="dubbo-consumer" owner="hanwei" />-->
+
+    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <!-- 详细介绍: https://blog.csdn.net/u012988901/article/details/84503672 -->
+    <dubbo:application name="dubbo-consumer">
+        <dubbo:parameter key="qos.enable" value="true" />
+        <dubbo:parameter key="qos.accept.foreign.ip" value="false" />
+        <dubbo:parameter key="qos.port" value="33333" />
+    </dubbo:application>
+
+    <!-- 连接注册中心 -->
+    <dubbo:registry   address="zookeeper://192.168.8.9:2181?backup=192.168.8.5:2181,192.168.8.6:2181" file="F://zk-config"/>
+    <!-- 暴露端口 --> <!-- protocol 指该应用用 dubbo 协议在 28080 端口暴露服务，其他应用可以通过这个接口调用服务。 -->
+    <!-- <dubbo:protocol name="dubbo" port="" />-->
+    <!--提供哪些接口给消费者调用 --><!-- check=false 启动时不检查配置 -->
+    <!-- <dubbo:reference interface="com.shadow.dubbo.IHello" id="IHelloService" />--> <!--check="false" 检查配置依赖 --> <!--  url="dubbo://192.168.56.1:28080/com.shadow.dubbo.IHello" -->
+    <!-- dubbo提供服务降级和服务容错机制, mock 是服务降级方法处理,timeout等待超时就会触发这个方法 -->
+    <!-- dubbo六种容错机制, 1.failsafe: 失败安全，可以认为是把错误吞掉（记录日志）  -->
+    <dubbo:reference interface="com.shadow.ssm.service.UserService"  id="productService"  check="true"   retries="2" timeout="20000"/> <!-- cluster=""  -->
+</beans>

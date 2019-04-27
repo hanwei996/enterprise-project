@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--提供方信息-->
+    <!--<dubbo:application name="dubbo-provider" owner="hanwei"/>-->
+
+    <!--注册中心 配置多注册中心第一种-->
+   <!-- <dubbo:registry id="zk1" address="zookeeper://192.168.8.5:2181"/>-->
+   <!-- <dubbo:registry id="zk2" address="zookeeper://192.168.8.6:2181"/>-->
+    <!-- 配置多注册中心第二种 -->
+   <!-- <dubbo:registry protocol="zk2" address="10.20.153.10:2181,10.20.153.11:2181,10.20.153.12:2181" />-->
+
+
+
+    <!-- 协议对应端口 -->
+  <!--  <dubbo:protocol port="20880" name="dubbo"/>-->
+
+
+    <!-- 暴露服务接口 -->  <!-- 协议地址可以配置多个对于一个服务, dubbo 循环取出协议 -->
+    <!-- 这里通过 service 名称指定引用 -->
+    <dubbo:service interface="com.shadow.ssm.service.UserService" ref="productService" />
+    <!-- 对应实例 -->
+   <!-- <bean id="myHelloService" class="com.shadow.ssm.service.impl.UserSericeImpl"/>-->
+
+</beans>

@@ -1,0 +1,6 @@
+com\shadow\mybatis\pojo\User.class
+com\shadow\mybatis\pojo\UserExample$Criterion.class
+com\shadow\mybatis\pojo\UserExample$GeneratedCriteria.class
+com\shadow\mybatis\pojo\UserExample.class
+com\shadow\mybatis\pojo\UserExample$Criteria.class
+com\shadow\mybatis\Idao\UserMapper.class
